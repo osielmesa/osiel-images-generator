@@ -1,13 +1,21 @@
-import {takeEvery, put} from 'redux-saga/effects'
-import { LOAD_MORE_IMAGES } from './HomeActionTypes'
-import { imagesLoaded } from './HomeActions'
+import {put, takeEvery, call} from 'redux-saga/effects'
+import { homeConstants } from './HomeActionTypes'
+import {imagesLoaded, loadingMoreImages, showError} from './HomeActions'
+import { fecthMoreImages } from '../../../common/api/ImagesAPI'
 
-function* loadMoreImages(){
-  yield put(imagesLoaded(['osiel','salsa']))
+function* loadMoreImages(action){
+  try{
+    yield put(loadingMoreImages(true))
+    const res = yield call(fecthMoreImages, action.newPage)
+    if(res){
+      yield put(imagesLoaded(res))
+    }
+  }catch(error){
+    yield put(showError(true,'An error occurred'))
+    console.log(error)
+  }
 }
 
-function* homeSaga(){
-  field takeEvery(LOAD_MORE_IMAGES,loadMoreImages)
-}
-
-export default homeSaga
+export const homeWatcherSagas = [
+  takeEvery(homeConstants.LOAD_MORE_IMAGES, loadMoreImages),
+];

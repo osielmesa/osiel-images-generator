@@ -1,11 +1,12 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
-import CommonReducer from './reducers/CommonReducer'
+
 import rootSaga from './Sagas'
+import HomeReducer from '../modules/Home/redux/HomeReducer'
 
 const rootReducer = combineReducers({
-  comon: CommonReducer
+  home: HomeReducer
 })
 
 const sagaMiddleware = createSagaMiddleware()

@@ -1,25 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import 'antd/dist/antd.css';
 import './App.css';
+
+import { Layout } from 'antd';
+import Home from './modules/Home/Home';
+const { Header, Content, Footer } = Layout;
+
+const styles = {
+  title: {
+    color: 'white'
+  },
+  content: {
+    padding: '0 50px',
+    marginTop: 20
+  },
+  footer: {
+    textAlign: 'center'
+  }
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout className="layout">
+      <Header>
+        <div className="logo" ></div>
+        <h2 style={styles.title}>Images generator</h2>
+      </Header>
+      <Content style={styles.content}>
+        <Home />
+      </Content>
+      <Footer style={styles.footer}>Osiel Lima ©2020 Created for instruction purposes about redux-saga</Footer>
+    </Layout>
   );
 }
 

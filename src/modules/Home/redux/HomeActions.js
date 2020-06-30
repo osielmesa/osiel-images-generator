@@ -1,6 +1,18 @@
-import { MORE_IMAGES_LOADED } from "./HomeActionTypes";
+import {homeConstants} from "./HomeActionTypes";
 
 export const imagesLoaded = (images) =>({
-  type:MORE_IMAGES_LOADED,
+  type:homeConstants.MORE_IMAGES_LOADED,
   payload:images
 })
+
+export const loadMoreImages = (newPage = 1) =>(
+  {type:homeConstants.LOAD_MORE_IMAGES, newPage}
+)
+
+export const loadingMoreImages = (loading) =>(
+  {type:homeConstants.LOADING_MORE_IMAGES, payload:loading}
+)
+
+export const showError = (show = false, message='') =>(
+  {type:homeConstants.SHOW_LOADING_IMAGES_ERROR, payload:{show,message}}
+)
