@@ -11,8 +11,8 @@ function* loadMoreImages(action){
       yield put(imagesLoaded(res))
     }
   }catch(error){
-    yield put(showError(true,'An error occurred'))
-    console.log(error)
+    yield put(loadingMoreImages(false))
+    yield put(showError(true,'An error occurred. Please check internet availability and try again!'))
   }
 }
 

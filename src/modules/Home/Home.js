@@ -1,3 +1,7 @@
+/**
+ * Home component
+ */
+
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Gallery from 'react-grid-gallery';
@@ -24,16 +28,28 @@ function Home() {
   const dispatch = useDispatch()
   const { images, currentImagesPage, loadingMore, error } = useSelector(state => state.home)
 
+  /**
+   * This hook will execute one time, after the component is mounted. (componentDidMount)
+   */
   useEffect(() => {
     handleShowMoreImages()
   }, [])
 
+  /**
+   * This hook will execute every time component update. (componentDidUpdate)
+   */
   useEffect(() => {
     if(error && error.show){
-      setTimeout(dispatch(showError(false,'')),5000)
+      setTimeout(() => {
+          dispatch(showError(false,''))
+        }, 5000)
     }
   })
 
+  /**
+   * It will be dispatched in load more button event
+   * @param event
+   */
   const handleShowMoreImages = (event) => {
     if(event){
       event.preventDefault()
@@ -43,6 +59,7 @@ function Home() {
     }
     dispatch(loadMoreImages(currentImagesPage))
   }
+
   return (
     <div style={styles.contentDiv}>
       <Gallery images={images} enableImageSelection={false} />
@@ -51,7 +68,7 @@ function Home() {
           Show more...
         </Button>
       </div>
-      {error && error.show && <Alert message="Error Text" type="error" />}
+      {error && error.show && <Alert message={error.message} type="error" />}
     </div>
   )
 }

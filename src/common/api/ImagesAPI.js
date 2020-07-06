@@ -23,6 +23,6 @@ export const fecthMoreImages = async (currentPage) => {
     });
     return elements
   }catch (e) {
-      throw new Error("Error fetching the images")
+    throw new Error("Error fetching the images")
   }
 }
